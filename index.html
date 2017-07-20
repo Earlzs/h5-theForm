@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #32383B;
+            color: #fff;
+        }
+
+        form {
+            margin: 100px auto;
+            width: 100%;
+            max-width: 800px;
+            font-size: 26px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 10px 15px;
+        }
+
+        input {
+            display: block;
+            width: 360px;
+            height: 30px;
+            margin: 20px 0;
+            /*background-color: */
+        }
+
+
+
+        input[type="submit"] {
+            width: 200px;
+            height: 30px;
+            background-color: #696;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!--表达form会自动对各种type类型的Input进行验证并给出提示  例如：type='email'会自动正则匹配并给出tip-->
+    <!--required是必填项目            autofocus页面出现后自动锁定的   -->
+
+    <!-- form表单会在点击 input :type=‘submit’时候进行自动验证  会根据用户输入内容给出提示，我们如何能自定义提示框里的内容呢，
+       H5新增的Oninvalid事件  和oninput事件结合使用   
+       pattern会可以传入一个正则匹配  注意pattern其实和Oninvalid事件一样也是点击提交以后，自动获取错误栏光标，并在每次输入都进行验证，
+    -->
+    <form action=''>
+        <!--Label的for属性本质是为了方便用户进行操作，当其点击到Labe所属的区域，光标会自动定位到与for相匹配的Id-->
+        <label for="name">
+            姓名：<input id='name' type="text" autofocus placeholder="请输入姓名" pattern="^1[3-9]\d{9}$"  oninvalid='setCustomValidity("别跟我呵呵，我有一百种方法让你活不下去！")'  oninput='setCustomValidity("")' >
+        </label>
+
+        <label for="email">
+            邮箱：<input  id='email' type="email" placeholder="请输入您的性别">
+        </label>
+
+        <label for='telphone'>
+            数字:<input id='telphone' type="number" name="number " value="" min="0" max="100">
+        </label>
+
+        <label>
+            滑块:<input type="range" name="range"  value="90"  min="4" max="104" id='range' >
+        </label>
+
+        <label>
+               拾色器:<input type="color" name="color" value="" id='select'>
+        </label>
+
+        <label>
+            <input type="text" name="text" value="" list="course" placeholder="请选择您喜欢的语言">
+			<datalist  id="course">
+				<option value="前端与移动开"></option>
+				<option value="php"></option>
+				<option value="ios"></option>
+				<option value="java"></option>
+				<option value="UI"></option>
+			</datalist>
+		</label>
+
+        <label for="">
+            <input type="submit" value="提交">
+        </label>
+    </form>
+</body>
+
+
+<script>
+    //以前一直在纠结一件事情，这种 type='color'的应用情景以及如何获取用户所选择的color值；
+    var select = document.getElementById('select');
+    select.onchange = function () {
+        var color = this.value;
+        alert(` 您选择的颜色是${color}`)
+    }
+
+</script>
+
+</html>
